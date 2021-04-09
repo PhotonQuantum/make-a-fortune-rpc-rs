@@ -19,6 +19,10 @@
 
 `https://fortune.fly.io`
 
+同时，本实例也部署在了国内服务器上。注意其带宽很小，可能会偶发断线。
+
+`https://fortune.lightquantum:9108`
+
 在闷声发财登录页面的 `RPC 服务器` 设置处输入该 URL 即可使用。
 
 ## 隐私警告

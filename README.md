@@ -14,9 +14,14 @@ Please refer to [make-a-fortune](https://github.com/skyzh/make-a-fortune) for mo
 
 ## Hosted Instance
 
-This RPC backend is automatically deployed to [fly.io](https://fly.io)
+This RPC backend is automatically deployed to [fly.io](https://fly.io).
 
 `https://fortune.fly.io`
+
+There's also an instance deployed at Tencent Cloud (Shanghai). Beware that this 
+server has a low bandwidth.
+
+`https://fortune.lightquantum:9108`
 
 Enter this URL in the login page of `make-a-fortune` and you are good to go.
 
