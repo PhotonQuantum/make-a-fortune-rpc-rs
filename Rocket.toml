@@ -1,0 +1,3 @@
+[default]
+wkfg_addr = "182.254.145.254:8080"
+max_tcp_conn = 16
