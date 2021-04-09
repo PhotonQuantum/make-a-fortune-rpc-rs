@@ -15,7 +15,9 @@
 
 ## 已部署实例
 
-`https://fortune.lightquantum.me`
+本实例已自动部署到 [fly.io](https://fly.io) 平台。
+
+`https://fortune.fly.io`
 
 在闷声发财登录页面的 `RPC 服务器` 设置处输入该 URL 即可使用。
 

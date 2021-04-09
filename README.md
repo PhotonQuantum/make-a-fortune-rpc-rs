@@ -14,7 +14,9 @@ Please refer to [make-a-fortune](https://github.com/skyzh/make-a-fortune) for mo
 
 ## Hosted Instance
 
-`https://fortune.lightquantum.me`
+This RPC backend is automatically deployed to [fly.io](https://fly.io)
+
+`https://fortune.fly.io`
 
 Enter this URL in the login page of `make-a-fortune` and you are good to go.
 
