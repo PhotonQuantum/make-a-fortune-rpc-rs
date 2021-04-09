@@ -12,6 +12,12 @@ Please refer to [make-a-fortune](https://github.com/skyzh/make-a-fortune) for mo
 - edit `Rocket.toml` to modify settings if needed.
 - `./target/release/make-a-fortune-rpc-rs`
 
+## Hosted Instance
+
+`https://fortune.lightquantum.me`
+
+Enter this URL in the login page of `make-a-fortune` and you are good to go.
+
 ## Privacy Warning
 
 All your data (including your messages and personal token) is transferred through 

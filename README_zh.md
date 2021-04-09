@@ -13,6 +13,12 @@
 - 如有需要，可通过 `Rocket.toml` 修改配置
 - `./target/release/make-a-fortune-rpc-rs`
 
+## 已部署实例
+
+`https://fortune.lightquantum.me`
+
+在闷声发财登录页面的 `RPC 服务器` 设置处输入该 URL 即可使用。
+
 ## 隐私警告
 
 如同任何「闷声发财」的 RPC 实现，连接本 RPC 实现使用「闷声发财」时，您的所有消息（包括用户令牌、发送与接收的内容）也都将通过 RPC 服务器传输。
