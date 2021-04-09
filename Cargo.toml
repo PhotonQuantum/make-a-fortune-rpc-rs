@@ -1,8 +1,11 @@
 [package]
-name = "make-a-fortune-rpc-rs"
+name = "fortune-rpc-rs"
 version = "0.1.0"
 authors = ["PhotonQuantum <self@lightquantum.me>"]
 edition = "2018"
+
+[profile.release]
+lto = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

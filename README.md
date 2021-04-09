@@ -10,7 +10,7 @@ Please refer to [make-a-fortune](https://github.com/skyzh/make-a-fortune) for mo
 ## Get Started
 - `cargo build --release`
 - edit `Rocket.toml` to modify settings if needed.
-- `./target/release/make-a-fortune-rpc-rs`
+- `./target/release/fortune-rpc-rs`
 
 ## Hosted Instance
 

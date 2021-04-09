@@ -213,6 +213,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "fortune-rpc-rs"
+version = "0.1.0"
+dependencies = [
+ "mobc",
+ "rocket",
+ "rocket_contrib",
+ "rocket_cors",
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
 name = "futures"
 version = "0.3.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -516,19 +529,6 @@ dependencies = [
  "scoped-tls",
  "serde",
  "serde_json",
-]
-
-[[package]]
-name = "make-a-fortune-rpc-rs"
-version = "0.1.0"
-dependencies = [
- "mobc",
- "rocket",
- "rocket_contrib",
- "rocket_cors",
- "serde",
- "serde_json",
- "thiserror",
 ]
 
 [[package]]

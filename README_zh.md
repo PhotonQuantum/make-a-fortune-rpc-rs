@@ -11,7 +11,7 @@
 
 - `cargo build --release`
 - 如有需要，可通过 `Rocket.toml` 修改配置
-- `./target/release/make-a-fortune-rpc-rs`
+- `./target/release/fortune-rpc-rs`
 
 ## 已部署实例
 
