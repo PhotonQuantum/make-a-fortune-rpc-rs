@@ -22,10 +22,10 @@ handlers = ["tls", "http"]
 port = "443"
 
 [[services.http_checks]]
-grace_period = "20s"
-interval = "15s"
+grace_period = "30s"
+interval = "30s"
 method = "get"
 path = "/api/version"
-protocol = "https"
+protocol = "http"
 restart_limit = 6
-timeout = "2s"
+timeout = "5s"
