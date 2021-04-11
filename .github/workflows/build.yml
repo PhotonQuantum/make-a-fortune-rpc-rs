@@ -1,8 +1,8 @@
 on:
   release:
-    types: [ created ]
+    types: [ published ]
 
-name: fly.io deploy
+name: build
 
 jobs:
   release:
