@@ -17,7 +17,7 @@ mod types;
 async fn version(config: State<'_, Config>) -> JsonValue {
     json!({
         "name": "「无可奉告」Android 版",
-        "version": "Rust, tokio",
+        "version": format!("Rust, tokio, v{}", env!("CARGO_PKG_VERSION")),
         "addr": format!("tcp://{}", config.wkfg_addr),
         "terms_of_service": "http://wukefenggao.cn/code",
         "rpc_source_code": "https://github.com/PhotonQuantum/make-a-fortune-rpc-rs",
