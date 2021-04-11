@@ -7,8 +7,6 @@ use thiserror::Error;
 pub enum RequestError {
     #[error("io error: {0}")]
     IOError(#[from] std::io::Error),
-    #[error("json error: {0}")]
-    JsonError(#[from] serde_json::Error),
     #[error("connection closed unexpectedly")]
     RemoteClosed,
 }
@@ -18,7 +16,7 @@ pub struct TcpConnection {
 }
 
 impl TcpConnection {
-    pub async fn request(&mut self, data: &[u8]) -> Result<serde_json::Value, RequestError> {
+    pub async fn request(&mut self, data: &[u8]) -> Result<String, RequestError> {
         let (rx, mut tx) = self.tcp.split();
         let mut rx = BufReader::new(rx);
 
@@ -27,7 +25,7 @@ impl TcpConnection {
         let mut buf = String::new();
         rx.read_line(&mut buf).await?;
 
-        Ok(serde_json::from_str(buf.as_str())?)
+        Ok(buf)
     }
 }
 

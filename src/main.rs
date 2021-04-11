@@ -26,15 +26,15 @@ async fn version(config: State<'_, Config>) -> JsonValue {
 }
 
 #[rocket::post("/rpc_proxy", format = "json", data = "<input>")]
-async fn rpc_proxy(pool: State<'_, Pool<TcpManager>>, input: Capped<&[u8]>) -> JsonValue {
+async fn rpc_proxy(pool: State<'_, Pool<TcpManager>>, input: Capped<&[u8]>) -> String {
     let conn = pool.get().await;
     match conn {
-        Err(err) => json!({"status": "rpc error", "msg": err.to_string()}),
+        Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
         Ok(mut conn) => {
             let resp = conn.request(*input).await;
             match resp {
-                Err(err) => json!({"status": "rpc error", "msg": err.to_string()}),
-                Ok(resp) => JsonValue::from(resp),
+                Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
+                Ok(resp) => resp,
             }
         }
     }
