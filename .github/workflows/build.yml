@@ -1,0 +1,44 @@
+on:
+  release:
+    types: [ created ]
+
+name: fly.io deploy
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-gnu
+          - x86_64-unknown-linux-musl
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout 🛎️
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        name: Setup Cargo Toolchain 🛎️
+        with:
+          target: ${{ matrix.target }}
+          toolchain: nightly
+          default: true
+      - uses: actions-rs/cargo@v1
+        name: Compile all targets 🚀
+        with:
+          command: build
+          args: --release --target=${{ matrix.target }}
+      - name: Create tar
+        run: tar -cvzf fortune-rpc-rs-${{ matrix.target }}.tar.gz -C target/${{ matrix.target }}/release fortune-rpc-rs
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: fortune-rpc-rs-${{ matrix.target }}.tar.gz application/tar+gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
