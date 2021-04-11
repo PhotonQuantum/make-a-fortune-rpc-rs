@@ -2,3 +2,7 @@
 wkfg_addr = "182.254.145.254:8080"
 address = "0.0.0.0"
 port = 8000
+[default.timeout]
+connect = "1s"
+read = "3s"
+write = "3s"

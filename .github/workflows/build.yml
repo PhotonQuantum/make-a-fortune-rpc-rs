@@ -30,7 +30,7 @@ jobs:
           toolchain: nightly
           default: true
       - uses: actions-rs/cargo@v1
-        name: Compile all targets 🚀
+        name: Compile 🚀
         with:
           command: build
           args: --release --target=${{ matrix.target }}

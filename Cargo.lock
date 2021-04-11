@@ -216,6 +216,7 @@ dependencies = [
 name = "fortune-rpc-rs"
 version = "0.1.0"
 dependencies = [
+ "humantime-serde",
  "rocket",
  "rocket_contrib",
  "rocket_cors",
@@ -413,6 +414,22 @@ name = "httpdate"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "494b4d60369511e7dea41cf646832512a94e542f68bb9c49e54518e0f468eb47"
+
+[[package]]
+name = "humantime"
+version = "2.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
+
+[[package]]
+name = "humantime-serde"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac34a56cfd4acddb469cc7fff187ed5ac36f498ba085caf8bbc725e3ff474058"
+dependencies = [
+ "humantime",
+ "serde",
+]
 
 [[package]]
 name = "hyper"
@@ -899,7 +916,7 @@ dependencies = [
 [[package]]
 name = "rocket_cors"
 version = "0.5.2"
-source = "git+https://github.com/PhotonQuantum/rocket_cors#59e58a363b9a31ef9825ff5e139da2d82b1de420"
+source = "git+https://github.com/PhotonQuantum/rocket_cors?rev=868e8fd185cd1dc3b1f448f9b46c13f96f97e68d#868e8fd185cd1dc3b1f448f9b46c13f96f97e68d"
 dependencies = [
  "log",
  "regex",

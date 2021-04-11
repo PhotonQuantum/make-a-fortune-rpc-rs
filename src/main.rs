@@ -2,6 +2,8 @@
 
 use rocket::data::Capped;
 use rocket::fairing::AdHoc;
+use rocket::http::ContentType;
+use rocket::response::Content;
 use rocket::State;
 use rocket_contrib::json::{json, JsonValue};
 use rocket_cors::AllowedOrigins;
@@ -25,18 +27,21 @@ async fn version(config: State<'_, Config>) -> JsonValue {
 }
 
 #[rocket::post("/rpc_proxy", format = "json", data = "<input>")]
-async fn rpc_proxy(config: State<'_, Config>, input: Capped<&[u8]>) -> String {
-    let conn = TcpConnection::connect(&config.wkfg_addr).await;
-    match conn {
-        Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
-        Ok(mut conn) => {
-            let resp = conn.request(*input).await;
-            match resp {
-                Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
-                Ok(resp) => resp,
+async fn rpc_proxy(config: State<'_, Config>, input: Capped<&[u8]>) -> Content<String> {
+    let conn = TcpConnection::connect(&config.wkfg_addr, config.timeout).await;
+    Content(
+        ContentType::JSON,
+        match conn {
+            Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
+            Ok(mut conn) => {
+                let resp = conn.request(*input).await;
+                match resp {
+                    Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
+                    Ok(resp) => resp,
+                }
             }
-        }
-    }
+        },
+    )
 }
 
 #[rocket::launch]
