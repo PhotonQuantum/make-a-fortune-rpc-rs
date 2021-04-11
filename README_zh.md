@@ -17,7 +17,7 @@
 
 本实例已自动部署到 [fly.io](https://fly.io) 平台。
 
-`https://fortune.fly.io`
+`https://fortune.fly.dev`
 
 同时，本实例也部署在了国内服务器上。注意其带宽很小，可能会偶发断线。
 
