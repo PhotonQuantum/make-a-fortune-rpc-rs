@@ -1,17 +1,16 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use mobc::Pool;
 use rocket::data::Capped;
 use rocket::fairing::AdHoc;
 use rocket::State;
 use rocket_contrib::json::{json, JsonValue};
 use rocket_cors::AllowedOrigins;
 
-use crate::tcp::TcpManager;
-use crate::types::Config;
+use crate::config::Config;
+use crate::tcp::TcpConnection;
 
+mod config;
 mod tcp;
-mod types;
 
 #[rocket::get("/version")]
 async fn version(config: State<'_, Config>) -> JsonValue {
@@ -26,8 +25,8 @@ async fn version(config: State<'_, Config>) -> JsonValue {
 }
 
 #[rocket::post("/rpc_proxy", format = "json", data = "<input>")]
-async fn rpc_proxy(pool: State<'_, Pool<TcpManager>>, input: Capped<&[u8]>) -> String {
-    let conn = pool.get().await;
+async fn rpc_proxy(config: State<'_, Config>, input: Capped<&[u8]>) -> String {
+    let conn = TcpConnection::connect(&config.wkfg_addr).await;
     match conn {
         Err(err) => json!({"status": "rpc error", "msg": err.to_string()}).to_string(),
         Ok(mut conn) => {
@@ -42,13 +41,6 @@ async fn rpc_proxy(pool: State<'_, Pool<TcpManager>>, input: Capped<&[u8]>) -> S
 
 #[rocket::launch]
 async fn rocket() -> rocket::Rocket {
-    let rocket = rocket::ignite();
-    let figment = rocket.figment();
-    let config: Config = figment.extract().expect("config");
-    let pool = Pool::builder()
-        .max_open(config.max_tcp_conn)
-        .build(TcpManager::new(config.wkfg_addr));
-
     let allowed_origins = AllowedOrigins::all();
     let cors = rocket_cors::CorsOptions {
         allowed_origins,
@@ -57,9 +49,8 @@ async fn rocket() -> rocket::Rocket {
     .to_cors()
     .unwrap();
 
-    rocket
+    rocket::ignite()
         .mount("/api", rocket::routes![version, rpc_proxy])
         .attach(AdHoc::config::<Config>())
         .attach(cors)
-        .manage(pool)
 }
