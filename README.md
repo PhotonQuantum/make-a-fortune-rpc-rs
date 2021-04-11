@@ -1,3 +1,9 @@
+# RIP Wukefenggao (No Comment)
+
+Wukefenggao is taken down for legal reasons. It's server will be shutdown at `2021-04-12T21:00+08`. RIP.
+
+Therefore, this backend is no longer useful after that. Repo archived.
+
 # Make A Fortune Rust RPC
 
 [中文介绍](README_zh.md)
